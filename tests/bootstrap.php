@@ -6,12 +6,18 @@ if ($config == false) {
     $user = getenv('CP_USER');
     $pass = getenv('CP_PASSWORD');
     $code = getenv('LOOKUP_CODE');
+    $city = getenv('LOOKUP_CITY');
+    $province = getenv('LOOKUP_PROVINCE');
 } else {
     $user = $config['CP_USER'];
     $pass = $config['CP_PASSWORD'];
     $code = $config['LOOKUP_CODE'];
+    $city = $config['LOOKUP_CITY'];
+    $province = $config['LOOKUP_PROVINCE'];
 }
 
 define('CP_USER', $user);
 define('CP_PASSWORD', $pass);
 define('LOOKUP_CODE', $code);
+define('LOOKUP_CITY', $city);
+define('LOOKUP_PROVINCE', $province);

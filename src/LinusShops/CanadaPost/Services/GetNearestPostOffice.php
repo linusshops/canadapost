@@ -18,23 +18,23 @@ class GetNearestPostOffice extends Service
     {
         $uri = "/rs/postoffice?";
         if ($this->hasParameter('d2po')) {
-            $uri .= "d2po={$this->getParameter('d2po')}";
+            $uri .= "d2po={$this->getParameter('d2po')}&";
         }
 
         if ($this->hasParameter('tonight')) {
-            $uri .= "tonight={$this->getParameter('tonight')}";
+            $uri .= "tonight={$this->getParameter('tonight')}&";
         }
 
-        $uri .= "maximum={$this->getParameter('maximum', 10)}";
+        $uri .= "maximum={$this->getParameter('maximum', 10)}&";
 
         if ($this->hasParameter('longitude') && $this->hasParameter('latitude')) {
-            $uri .= "longitude={$this->getParameter('longitude')}";
-            $uri .= "latitude={$this->getParameter('latitude')}";
+            $uri .= "longitude={$this->getParameter('longitude')}&";
+            $uri .= "latitude={$this->getParameter('latitude')}&";
         } else {
-            $uri .= "postalCode={$this->getParameter('postalCode')}";
-            $uri .= "province={$this->getParameter('province')}";
-            $uri .= "city={$this->getParameter('city')}";
-            $uri .= "streetName={$this->getParameter('streetName')}";
+            $uri .= "postalCode={$this->getParameter('postalCode')}&";
+            $uri .= "province={$this->getParameter('province')}&";
+            $uri .= "city={$this->getParameter('city')}&";
+            $uri .= "streetName={$this->getParameter('streetName')}&";
         }
 
         return $uri;

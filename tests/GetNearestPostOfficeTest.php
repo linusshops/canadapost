@@ -1,4 +1,5 @@
 <?php
+use GuzzleHttp\Exception\ClientException;
 
 /**
  *
@@ -35,11 +36,12 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
 
         /** @var \LinusShops\CanadaPost\Services\GetNearestPostOffice $service */
         $service = $factory->getService('GetNearestPostOffice');
+
         $response = $service
             ->setParameter('d2po', 'true')
             ->setParameter('postalCode', LOOKUP_CODE)
-            ->send()
-        ;
-        print_r($response);
+            ->setParameter('city', LOOKUP_CITY)
+            ->setParameter('province', LOOKUP_PROVINCE)
+            ->send();
     }
 }
