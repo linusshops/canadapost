@@ -24,4 +24,11 @@ abstract class Service
     }
 
     abstract public function doRequest();
+
+    public function validateByXsd(\DOMDocument $document) {
+        $className = get_class($this);
+        $path = __DIR__.'../../../resources/xsd/'.$className.'.xsd';
+
+        return $document->schemaValidate($path);
+    }
 }
