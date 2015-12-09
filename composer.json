@@ -1,0 +1,39 @@
+{
+  "name": "linusshops/canadapost",
+  "description": "Implementation of Canada Post API",
+  "version": "0.0.1",
+  "type": "utility",
+  "keywords": [
+    "linus shops",
+    "canadas motorcycle",
+    "mx canada",
+    "canada post"
+  ],
+  "homepage": "https://github.com/linusshops/canadapost",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Sam Schmidt",
+      "email": "samuel@dersam.net",
+      "homepage": "http://dersam.net",
+      "role": "Web Developer"
+    },
+    {
+      "name": "Linus Shops Inc",
+      "email": "corporate@linusshops.com",
+      "homepage": "http://www.linusshops.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "LinusShops\\CanadaPost\\":"src/LinusShops/CanadaPost"
+    }
+  }
+}
