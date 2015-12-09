@@ -70,6 +70,24 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
 
     public function testSetMaximumOffices()
     {
+        $factory = new \LinusShops\CanadaPost\ServiceFactory(
+            "https://ct.soa-gw.canadapost.ca",
+            CP_USER,
+            CP_PASSWORD
+        );
 
+        /** @var \LinusShops\CanadaPost\Services\GetNearestPostOffice $service */
+        $service = $factory->getService('GetNearestPostOffice');
+        $response = $service
+            ->setParameter('d2po', 'true')
+            ->setParameter('longitude', LOOKUP_LONG)
+            ->setParameter('latitude', LOOKUP_LAT)
+            ->setParameter('maximum', 5)
+            ->send();
+
+        $doc = new DOMDocument();
+        $this->assertTrue($doc->loadXML($response->getBody()), "Response not valid XML");
+        $children = $doc->firstChild->childNodes;
+        $this->assertEquals(5, $children->length);
     }
 }
