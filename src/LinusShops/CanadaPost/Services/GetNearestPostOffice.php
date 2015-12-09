@@ -1,6 +1,7 @@
 <?php
 namespace LinusShops\CanadaPost\Services;
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use LinusShops\CanadaPost\Service;
 /**
  * Get the nearest post office
@@ -27,7 +28,7 @@ class GetNearestPostOffice extends Service
         $uri .= "maximum={$this->getParameter('maximum', 10)}";
 
         if ($this->hasParameter('longitude') && $this->hasParameter('latitude')) {
-            $uri .= "logitude={$this->getParameter('longitude')}";
+            $uri .= "longitude={$this->getParameter('longitude')}";
             $uri .= "latitude={$this->getParameter('latitude')}";
         } else {
             $uri .= "postalCode={$this->getParameter('postalCode')}";
@@ -40,14 +41,12 @@ class GetNearestPostOffice extends Service
     }
 
     /**
-     * @return \Guzzle\Http\Message\RequestInterface
+     * @return Request
      */
     protected function buildRequest()
     {
-        $client = new Client($this->getBaseUrl());
-        $request = $client->get($this->getUri());
-        $request
-            ->addHeader('Accept', 'application/vnd.cpc.postoffice+xml ');
+        $request = new Request('GET', $this->getUri());
+        $this->setHeader('Accept', 'application/vnd.cpc.postoffice+xml ');
         return $request;
     }
 }

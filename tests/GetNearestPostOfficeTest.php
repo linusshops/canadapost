@@ -24,4 +24,22 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf('\LinusShops\CanadaPost\Service', $service);
     }
+
+    public function testGetNearestPostOfficeLookupByPostalCode()
+    {
+        $factory = new \LinusShops\CanadaPost\ServiceFactory(
+            "https://ct.soa-gw.canadapost.ca",
+            CP_USER,
+            CP_PASSWORD
+        );
+
+        /** @var \LinusShops\CanadaPost\Services\GetNearestPostOffice $service */
+        $service = $factory->getService('GetNearestPostOffice');
+        $response = $service
+            ->setParameter('d2po', 'true')
+            ->setParameter('postalCode', LOOKUP_CODE)
+            ->send()
+        ;
+        print_r($response);
+    }
 }

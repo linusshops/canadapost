@@ -1,8 +1,9 @@
 <?php
 namespace LinusShops\CanadaPost;
 
-use Guzzle\Http\Message\RequestInterface;
-use Guzzle\Http\Message\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 
 
 /**
@@ -24,7 +25,9 @@ abstract class Service
     protected $userid;
     protected $password;
     protected $parameters = array();
-    protected $headers = array();
+    protected $headers = array(
+        'Accept-language'=> 'en-CA'
+    );
 
     public function __construct($baseUrl, $userid, $password)
     {
@@ -67,7 +70,7 @@ abstract class Service
     }
 
     /**
-     * @return RequestInterface
+     * @return Request
      */
     abstract protected function buildRequest();
 
@@ -78,25 +81,17 @@ abstract class Service
     {
         $request = $this->buildRequest();
 
-        //Apply standard header defaults
-        $request->addHeader('Accept-language', 'en-CA');
-        $request->addHeader('Authorization', base64_encode(
+        //Apply standard headers
+        $this->setHeader('Authorization', 'Basic '.base64_encode(
             $this->userid.':'.$this->password
         ));
 
-        //Apply custom headers (with possible overwrite)
-        $this->applyHeaders($request);
+        $client = new Client(array(
+            'base_uri' => $this->getBaseUrl()
+        ));
 
-        return $request->send();
-    }
-
-    /**
-     * @param RequestInterface $request
-     */
-    private function applyHeaders(RequestInterface $request)
-    {
-        foreach ($this->headers as $field => $value) {
-            $request->addHeader($field, $value);
-        }
+        return $client->send($request, array(
+            'headers' => $this->headers
+        ));
     }
 }
