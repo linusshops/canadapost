@@ -44,6 +44,11 @@ abstract class Service
         return $this;
     }
 
+    public function hasParameter($name)
+    {
+        return isset($this->parameters[$name]);
+    }
+
     public function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
@@ -52,7 +57,7 @@ abstract class Service
 
     public function getParameter($name, $default=null)
     {
-        return isset($this->parameters[$name]) ?
+        return $this->hasParameter($name) ?
             $this->parameters[$name] : $default;
     }
 
