@@ -10,16 +10,16 @@ namespace LinusShops\CanadaPost;
 
 class ServiceFactory
 {
-    private $endpointUrl;
+    private $baseUrl;
 
-    public function __construct($endpointUrl)
+    public function __construct($baseUrl)
     {
-        $this->endpointUrl = $endpointUrl;
+        $this->baseUrl = $baseUrl;
     }
 
     public function getService($name)
     {
-        $classname = "\\LinusShops\\CanadaPost\\Services\{$name}";
-        return new $classname();
+        $classname = "\\LinusShops\\CanadaPost\\Services\\{$name}";
+        return new $classname($this->baseUrl);
     }
 }

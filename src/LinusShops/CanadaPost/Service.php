@@ -12,47 +12,30 @@ use LinusShops\CanadaPost\Exceptions\InvalidRequestException;
  */
 abstract class Service
 {
-    protected $endpointUrl;
+    protected $baseUrl;
     protected $parameters = array();
 
-    public function __construct($endpointUrl)
+    public function __construct($baseUrl)
     {
-        $this->endpointUrl = $endpointUrl;
+        $this->baseUrl = $baseUrl;
     }
 
-    public function parameter($name, $value)
+    public function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
         return $this;
     }
 
-    abstract public function verb();
-
-    /**
-     * @return \DOMDocument
-     */
-    abstract public function buildXml();
-
-    public function doRequest()
+    public function getParameter($name)
     {
-        $document = $this->buildXml();
-        $valid = $this->validateByXsd($document);
-
-        if (!$valid) {
-            $errstr = '';
-            $errors = libxml_get_errors();
-            foreach ($errors as $error) {
-                $errstr .= $error->message.'\n';
-            }
-            throw new InvalidRequestException('Request document failed validation: '.$errstr);
-        }
+        return isset($this->parameters[$name]) ?
+            $this->parameters[$name] : null;
     }
 
-    public function validateByXsd(\DOMDocument $document) {
-        libxml_use_internal_errors(true);
-        $className = get_class($this);
-        $path = __DIR__.'../../../resources/xsd/'.$className.'.xsd';
+    abstract public function send();
 
-        return $document->schemaValidate($path);
+    public function parse(\DOMDocument $document)
+    {
+
     }
 }
