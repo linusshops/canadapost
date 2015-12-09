@@ -12,8 +12,13 @@ use LinusShops\CanadaPost\Service;
 
 class GetNearestPostOffice extends Service
 {
-    public function doRequest()
+    public function verb()
     {
-        // TODO: Implement doRequest() method.
+        return 'GET';
+    }
+
+    public function buildXml()
+    {
+        // TODO: Implement buildXml() method.
     }
 }

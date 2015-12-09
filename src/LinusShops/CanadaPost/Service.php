@@ -1,5 +1,8 @@
 <?php
 namespace LinusShops\CanadaPost;
+
+use LinusShops\CanadaPost\Exceptions\InvalidRequestException;
+
 /**
  *
  *
@@ -23,9 +26,30 @@ abstract class Service
         return $this;
     }
 
-    abstract public function doRequest();
+    abstract public function verb();
+
+    /**
+     * @return \DOMDocument
+     */
+    abstract public function buildXml();
+
+    public function doRequest()
+    {
+        $document = $this->buildXml();
+        $valid = $this->validateByXsd($document);
+
+        if (!$valid) {
+            $errstr = '';
+            $errors = libxml_get_errors();
+            foreach ($errors as $error) {
+                $errstr .= $error->message.'\n';
+            }
+            throw new InvalidRequestException('Request document failed validation: '.$errstr);
+        }
+    }
 
     public function validateByXsd(\DOMDocument $document) {
+        libxml_use_internal_errors(true);
         $className = get_class($this);
         $path = __DIR__.'../../../resources/xsd/'.$className.'.xsd';
 
