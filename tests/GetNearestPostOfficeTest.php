@@ -13,7 +13,7 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
     public function testLoadByFactory()
     {
         $factory = new \LinusShops\CanadaPost\ServiceFactory(
-            "https://ct.soa-gw.canadapost.ca",
+            CP_SANDBOX_ENDPOINT,
             CP_USER,
             CP_PASSWORD
         );
@@ -29,7 +29,7 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
     public function testGetNearestPostOfficeLookupByPostalCode()
     {
         $factory = new \LinusShops\CanadaPost\ServiceFactory(
-            "https://ct.soa-gw.canadapost.ca",
+            CP_SANDBOX_ENDPOINT,
             CP_USER,
             CP_PASSWORD
         );
@@ -51,7 +51,7 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
     public function testGetNearestPostOfficeLookupByLongLat()
     {
         $factory = new \LinusShops\CanadaPost\ServiceFactory(
-            "https://ct.soa-gw.canadapost.ca",
+            CP_SANDBOX_ENDPOINT,
             CP_USER,
             CP_PASSWORD
         );
@@ -71,7 +71,7 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
     public function testSetMaximumOffices()
     {
         $factory = new \LinusShops\CanadaPost\ServiceFactory(
-            "https://ct.soa-gw.canadapost.ca",
+            CP_SANDBOX_ENDPOINT,
             CP_USER,
             CP_PASSWORD
         );

@@ -5,25 +5,16 @@ $config = json_decode(file_get_contents(__DIR__.'/config.json'), true);
 if ($config == false) {
     $user = getenv('CP_USER');
     $pass = getenv('CP_PASSWORD');
-    $code = getenv('LOOKUP_CODE');
-    $city = getenv('LOOKUP_CITY');
-    $province = getenv('LOOKUP_PROVINCE');
-    $long = getenv('LOOKUP_LONG');
-    $lat = getenv('LOOKUP_LAT');
 } else {
     $user = $config['CP_USER'];
     $pass = $config['CP_PASSWORD'];
-    $code = $config['LOOKUP_CODE'];
-    $city = $config['LOOKUP_CITY'];
-    $province = $config['LOOKUP_PROVINCE'];
-    $long = $config['LOOKUP_LONG'];
-    $lat = $config['LOOKUP_LAT'];
 }
 
 define('CP_USER', $user);
 define('CP_PASSWORD', $pass);
-define('LOOKUP_CODE', $code);
-define('LOOKUP_CITY', $city);
-define('LOOKUP_PROVINCE', $province);
-define('LOOKUP_LONG', $long);
-define('LOOKUP_LAT', $lat);
+define('CP_SANDBOX_ENDPOINT', "https://ct.soa-gw.canadapost.ca");
+define('LOOKUP_CODE', 'H3G2A9');
+define('LOOKUP_CITY', 'Montreal');
+define('LOOKUP_PROVINCE', 'QC');
+define('LOOKUP_LONG', '-73.63908');
+define('LOOKUP_LAT', "45.54545");
