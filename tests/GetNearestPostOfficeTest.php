@@ -90,4 +90,27 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
         $children = $doc->firstChild->childNodes;
         $this->assertEquals(5, $children->length);
     }
+
+    public function testSetLanguage()
+    {
+        $factory = new \LinusShops\CanadaPost\ServiceFactory(
+            CP_SANDBOX_ENDPOINT,
+            CP_USER,
+            CP_PASSWORD
+        );
+
+        /** @var \LinusShops\CanadaPost\Services\GetNearestPostOffice $service */
+        $service = $factory->getService('GetNearestPostOffice');
+        $response = $service
+            ->setLanguage('fr-CA')
+            ->setParameter('d2po', 'true')
+            ->setParameter('longitude', LOOKUP_LONG)
+            ->setParameter('latitude', LOOKUP_LAT)
+            ->send();
+
+        $doc = new DOMDocument();
+        $this->assertTrue($doc->loadXML($response->getBody()), "Response not valid XML");
+        $children = $doc->firstChild->childNodes;
+        $this->assertEquals(10, $children->length);
+    }
 }

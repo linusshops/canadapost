@@ -39,6 +39,7 @@ abstract class Service
     public function setLanguage($value)
     {
         $this->setHeader('Accept-language', $value);
+        return $this;
     }
 
     public function setHeader($name, $value)
