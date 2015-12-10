@@ -1,7 +1,11 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
+$configfile = __DIR__.'/config.json';
+$config = false;
+if (file_exists($configfile)) {
+    $config = json_decode(file_get_contents(__DIR__.'/config.json'), true);
+}
 
-$config = json_decode(file_get_contents(__DIR__.'/config.json'), true);
 if ($config == false) {
     $user = getenv('CP_USER');
     $pass = getenv('CP_PASSWORD');
