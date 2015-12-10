@@ -23,7 +23,7 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
             '\\LinusShops\\CanadaPost\\Services\\GetNearestPostOffice',
             $service
         );
-        $this->assertInstanceOf('\LinusShops\CanadaPost\Service', $service);
+        $this->assertInstanceOf('\\LinusShops\\CanadaPost\\Service', $service);
     }
 
     public function testGetNearestPostOfficeLookupByPostalCode()
