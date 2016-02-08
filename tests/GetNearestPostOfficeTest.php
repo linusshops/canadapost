@@ -113,4 +113,10 @@ class GetNearestPostOfficeTest extends PHPUnit_Framework_TestCase
         $children = $doc->firstChild->childNodes;
         $this->assertEquals(10, $children->length);
     }
+
+    public function testDoubleLookup()
+    {
+        $this->testGetNearestPostOfficeLookupByPostalCode();
+        $this->testGetNearestPostOfficeLookupByPostalCode();
+    }
 }
