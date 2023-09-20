@@ -29,7 +29,7 @@
   "require": {
     "php": ">=5.5.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^6.1.1"
+    "guzzlehttp/guzzle": "^7.4.2"
   },
   "autoload": {
     "psr-4": {
